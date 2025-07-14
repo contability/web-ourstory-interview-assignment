@@ -12,12 +12,14 @@ import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import unusedImports from 'eslint-plugin-unused-imports';
+import tailwind from 'eslint-plugin-tailwindcss';
 
 export default tseslint.config(
   [
     globalIgnores(['dist']),
     eslintConfigPrettier,
     eslintPluginPrettierRecommended,
+    ...tailwind.configs['flat/recommended'],
     {
       files: ['**/*.{ts,tsx}'],
       extends: [

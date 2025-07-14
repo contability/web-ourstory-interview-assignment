@@ -5,7 +5,8 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "noEmit": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "types": ["jest", "@testing-library/jest-dom"]
   },
   "include": ["src", "jest.setup.ts"]
 }
