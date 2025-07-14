@@ -34,14 +34,14 @@ npm run build
 yarn build
 ```
 
-- 프로덕션 모드 실행
+- 빌드된 프로젝트 미리보기
 
 ```bash
 # use npm
-npm run start
+npm run preview
 
 # use yarn
-yarn start
+yarn preview
 ```
 
 - 린트 검사
@@ -82,4 +82,24 @@ npm run test
 
 # use yarn
 yarn test
+```
+
+- 테스트 감시 모드 실행
+
+```bash
+# use npm
+npm run test:watch
+
+# use yarn
+yarn test:watch
+```
+
+- 테스트 커버리지 확인
+
+```bash
+# use npm
+npm run test:coverage
+
+# use yarn
+yarn test:coverage
 ```
