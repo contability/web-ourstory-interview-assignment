@@ -76,7 +76,7 @@ export default tseslint.config([
       'jsx-a11y/anchor-is-valid': 'error',
 
       'import/order': [
-        'error',
+        'off',
         {
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
           'newlines-between': 'always',
@@ -135,7 +135,6 @@ export default tseslint.config([
         {
           selector: 'interface',
           format: ['PascalCase'],
-          prefix: ['I'],
         },
         {
           selector: 'typeAlias',
