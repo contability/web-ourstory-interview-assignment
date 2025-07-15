@@ -3,7 +3,7 @@ import Heading from '@components/typography/heading';
 import BulletList from '@components/bullet-list';
 import { Link } from 'react-router-dom';
 
-const Landing = () => {
+const LandingPage = () => {
   return (
     <main className="flex h-dvh flex-col items-center justify-center px-4 py-12">
       <section className="w-full max-w-3xl rounded-lg bg-white p-8 shadow-md md:p-12">
@@ -82,4 +82,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default LandingPage;
