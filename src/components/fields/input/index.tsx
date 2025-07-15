@@ -17,7 +17,7 @@ const Input = (props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
         type={type}
         value={value}
         defaultValue={defaultValue}
-        autoComplete="new-password"
+        autoComplete={type === 'password' ? 'new-password' : 'off'}
         placeholder={placeholder}
         id={id}
         className={twMerge(

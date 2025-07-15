@@ -6,10 +6,10 @@ interface SignupData {
   password?: string;
   email?: string;
   phone?: string;
-  birth?: string;
+  birthday?: string;
   gender?: string;
   name?: string;
-  nickname?: string;
+  nickName?: string;
   sns?: string;
 }
 
