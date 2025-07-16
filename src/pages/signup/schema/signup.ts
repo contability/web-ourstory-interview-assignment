@@ -7,11 +7,12 @@ export const signupFormSchema = z.object({
     .string()
     .min(1, { message: '이메일을 입력해주세요.' })
     .email({ message: '이메일 형식이 올바르지 않습니다.' }),
+  countryCode: z.string().min(1, { message: '국가 코드를 선택해주세요.' }),
   phone: z
     .string()
     .min(1, { message: '전화번호를 입력해주세요.' })
-    .refine(value => /^\+\d{1,3}\d{9,10}$/.test(value), {
-      message: '국제번호(+국가코드)와 전화번호를 입력해주세요. (예: +821012345678)',
+    .refine(value => /^\d{9,11}$/.test(value), {
+      message: '올바른 전화번호 형식이 아닙니다. (9-11자리 숫자)',
     }),
   birthday: z.string(),
   gender: z.string(),

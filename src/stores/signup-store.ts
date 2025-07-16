@@ -5,6 +5,7 @@ interface SignupData {
   id?: string;
   password?: string;
   email?: string;
+  countryCode?: string;
   phone?: string;
   birthday?: string;
   gender?: string;

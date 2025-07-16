@@ -15,6 +15,7 @@ const SignupPage = () => {
     handleSubmit,
     watch,
     trigger,
+    control,
     formState: { errors },
   } = useForm<SignupFormValues>({
     resolver: zodResolver(signupFormSchema),
@@ -22,12 +23,14 @@ const SignupPage = () => {
       id: '',
       password: '',
       email: '',
+      countryCode: '',
       phone: '',
       birthday: '',
       gender: '',
       name: '',
       nickName: '',
     },
+    mode: 'onSubmit',
   });
 
   const handleSignupComplete = (formData: SignupFormValues) => {
@@ -48,11 +51,11 @@ const SignupPage = () => {
         <div className="p-6">
           <StepForm
             content={[
-              <BasicInfoStep key="basic-info" register={register} watch={watch} errors={errors} />,
+              <BasicInfoStep key="basic-info" register={register} watch={watch} errors={errors} control={control} />,
               <AdditionalInfoStep key="additional-info" register={register} watch={watch} errors={errors} />,
             ]}
             fieldsToValidateByStep={[
-              ['id', 'password', 'email', 'phone'],
+              ['id', 'password', 'email', 'countryCode', 'phone'],
               ['birthday', 'gender', 'name', 'nickName'],
             ]}
             submitButtonText="가입 완료"
