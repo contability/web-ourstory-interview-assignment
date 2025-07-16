@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import StepIndicator from '@components/form/step-indicator';
 import { type FieldValues, type UseFormTrigger, type UseFormHandleSubmit, type Path } from 'react-hook-form';
+import StepButtons from './step-buttons';
 
 interface StepFormProps<T extends FieldValues = FieldValues> {
   content: ReactNode[];
@@ -57,32 +58,16 @@ function StepForm<T extends FieldValues = FieldValues>({
 
       <form onSubmit={handleFormSubmit}>
         <div className="rounded-lg bg-cream p-6">{content[stepIndex]}</div>
-
-        <div className="mt-8 flex justify-between">
-          {stepIndex > 0 ? (
-            <button
-              type="button"
-              onClick={handlePrev}
-              className="rounded-full border border-forest px-6 py-2 text-forest transition-colors hover:bg-cream"
-            >
-              {prevButtonText}
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={onCancel}
-              className="rounded-full border border-forest px-6 py-2 text-forest transition-colors hover:bg-cream"
-            >
-              {cancelButtonText}
-            </button>
-          )}
-          <button
-            type="submit"
-            className="rounded-full bg-forest px-6 py-2 text-white transition-colors hover:bg-olive"
-          >
-            {isLastStep ? submitButtonText : nextButtonText}
-          </button>
-        </div>
+        <StepButtons
+          stepIndex={stepIndex}
+          prevButtonText={prevButtonText}
+          cancelButtonText={cancelButtonText}
+          isLastStep={isLastStep}
+          submitButtonText={submitButtonText}
+          nextButtonText={nextButtonText}
+          handlePrev={handlePrev}
+          onCancel={onCancel}
+        />
       </form>
     </section>
   );
