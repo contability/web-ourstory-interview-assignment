@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React, { memo, type ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface HeadingProps {
@@ -40,4 +40,5 @@ const Heading = ({ children, className = '', level = 'h2' }: HeadingProps) => {
   return renderHeading();
 };
 
-export default Heading;
+Heading.dispayName = 'Heading';
+export default memo(Heading);
