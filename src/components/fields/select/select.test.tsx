@@ -58,12 +58,6 @@ describe('Select 컴포넌트', () => {
   });
 
   test('옵션 선택 시 값이 변경되어야 한다', () => {
-    const { container } = render(
-      <TestFormWrapper>
-        <Select optionList={mockOptions} name="test" />
-      </TestFormWrapper>,
-    );
-
     const selectButton = screen.getByRole('button');
     fireEvent.click(selectButton);
 

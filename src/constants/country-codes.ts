@@ -1,6 +1,6 @@
-import type { SelectOption } from '@components/fields/select';
+import type { LabelValuePair } from '@dataTypes/pair';
 
-export const COUNTRY_CODES: SelectOption[] = [
+export const COUNTRY_CODES: LabelValuePair[] = [
   { value: '+1', label: '+1' }, // 미국, 캐나다
   { value: '+7', label: '+7' }, // 러시아
   { value: '+20', label: '+20' }, // 이집트

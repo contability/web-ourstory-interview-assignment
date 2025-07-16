@@ -3,14 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useController, type Control, type FieldValues, type Path } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-
-export interface SelectOption {
-  value: string | number;
-  label: string;
-}
+import type { LabelValuePair } from '@dataTypes/pair';
 
 interface SelectProps<T extends FieldValues = FieldValues> {
-  optionList: SelectOption[];
+  optionList: LabelValuePair[];
   name: Path<T>;
   control?: Control<T>;
   className?: string;
