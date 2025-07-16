@@ -36,14 +36,6 @@ export const Password: Story = {
   },
 };
 
-export const Email: Story = {
-  args: {
-    type: 'email',
-    placeholder: '이메일을 입력하세요',
-    className: 'w-80',
-  },
-};
-
 export const Disabled: Story = {
   args: {
     type: 'text',
