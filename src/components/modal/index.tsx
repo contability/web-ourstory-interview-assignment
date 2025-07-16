@@ -3,7 +3,7 @@ import { useEffect, useState, type PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 import ModalContainer from './container';
 
-interface ModalProps {
+export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
@@ -29,7 +29,7 @@ const Modal = ({ isOpen, onClose, children }: PropsWithChildren<ModalProps>) => 
         {isOpen && (
           <ModalContainer onClose={onClose}>
             <motion.div
-              className="block px-4"
+              className="block px-4 shadow-lg"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 20, opacity: 0 }}

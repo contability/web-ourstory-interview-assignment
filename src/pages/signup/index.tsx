@@ -7,9 +7,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signupFormSchema } from './schema/signup';
 import type { SignupFormValues } from './schema/signup';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import AlertModal from '@components/modal/content/alert-modal';
+import KeyValueList from '@components/key-value-list.tsx';
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState<Record<string, string | number>>();
   const {
     register,
     handleSubmit,
@@ -33,18 +38,22 @@ const SignupPage = () => {
     mode: 'onSubmit',
   });
 
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   const handleSignupComplete = (formData: SignupFormValues) => {
-    // TODO: 모달 처리
-    console.log('회원가입 데이터:', {
+    setModalContent({
       id: formData.id,
       password: formData.password,
       email: formData.email,
       phone: `${formData.countryCode}${formData.phone}`,
       birthday: formData.birthday,
-      gender: formData.gender,
+      gender: formData.gender ?? '',
       name: formData.name,
       nickName: formData.nickName,
     });
+    setIsModalOpen(true);
   };
 
   return (
@@ -81,6 +90,13 @@ const SignupPage = () => {
           />
         </div>
       </article>
+      <AlertModal
+        title="회원가입 완료"
+        message={<KeyValueList data={modalContent ?? {}} />}
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onConfirm={handleModalClose}
+      />
     </main>
   );
 };
