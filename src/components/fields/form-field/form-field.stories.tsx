@@ -32,6 +32,7 @@ export const WithError: Story = {
     },
     error: {
       message: '이메일을 입력해주세요.',
+      type: 'required',
     },
     children: <Input id="email" placeholder="이메일을 입력하세요" className="w-80" />,
   },

@@ -34,7 +34,7 @@ const FormField = ({
           <label
             htmlFor={label.id}
             className={twMerge(
-              'mb-1 block w-[3rem] text-sm font-medium text-gray-700 md:text-base lg:text-lg',
+              'mb-1 block w-[5rem] text-sm font-medium text-gray-700 md:text-base lg:text-lg',
               isLineBreak && 'w-full',
               labelClassName,
             )}
@@ -45,7 +45,7 @@ const FormField = ({
         {children}
       </div>
       {error && (
-        <p className={twMerge('mt-1 ml-[3.5rem] text-sm text-red-600', isLineBreak && 'ml-0')} role="alert">
+        <p className={twMerge('mt-1 ml-[5rem] text-sm text-red-600', isLineBreak && 'ml-0')} role="alert">
           {error.message}
         </p>
       )}
