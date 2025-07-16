@@ -35,7 +35,16 @@ const SignupPage = () => {
 
   const handleSignupComplete = (formData: SignupFormValues) => {
     // TODO: 모달 처리
-    console.log('회원가입 데이터:', formData);
+    console.log('회원가입 데이터:', {
+      id: formData.id,
+      password: formData.password,
+      email: formData.email,
+      phone: `${formData.countryCode}${formData.phone}`,
+      birthday: formData.birthday,
+      gender: formData.gender,
+      name: formData.name,
+      nickName: formData.nickName,
+    });
   };
 
   return (

@@ -8,12 +8,14 @@
 
 ## 2. 회원가입(signup) 페이지
 
-- [ ] 퍼블리싱
-- [ ] input, form field 컴포넌트 추가
+- [x] 퍼블리싱
+- [x] input, form field 컴포넌트 추가
 - [x] zod, react-hook-form 설치
 - [x] zustand 설치 및 signup store 설정
+- [ ] date picker 적용
 - [ ] SNS 소셜 계정 연결
 - [ ] 회원가입 버튼 (추후 동작에 대한 기획 부재, 간단한 submit 액션으로 대체)
+- [ ] 모달 추가
 
 ## 3. 테스트
 

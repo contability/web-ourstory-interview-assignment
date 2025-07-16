@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import StepIndicator from '@components/form/step-indicator';
-import { type FieldValues, type UseFormTrigger, type UseFormHandleSubmit } from 'react-hook-form';
+import { type FieldValues, type UseFormTrigger, type UseFormHandleSubmit, type Path } from 'react-hook-form';
 
 interface StepFormProps<T extends FieldValues = FieldValues> {
-  content: Array<ReactNode>;
-  fieldsToValidateByStep?: Array<Array<keyof T | string>>;
+  content: ReactNode[];
+  fieldsToValidateByStep?: Array<Array<Path<T>>>;
   submitButtonText?: string;
   cancelButtonText?: string;
   nextButtonText?: string;
@@ -28,11 +28,12 @@ function StepForm<T extends FieldValues = FieldValues>({
   onSubmit,
   onCancel,
 }: StepFormProps<T>) {
-  const [stepIndex, setStepIndex] = useState(1);
+  const [stepIndex, setStepIndex] = useState(0);
+  const isLastStep = stepIndex + 1 === content.length;
 
   const handleNext = async () => {
     if (fieldsToValidateByStep && fieldsToValidateByStep[stepIndex]) {
-      const isStepValid = await trigger(fieldsToValidateByStep[stepIndex] as any);
+      const isStepValid = await trigger(fieldsToValidateByStep[stepIndex]);
       if (isStepValid) setStepIndex(prev => prev + 1);
     } else {
       setStepIndex(prev => prev + 1);
@@ -43,13 +44,18 @@ function StepForm<T extends FieldValues = FieldValues>({
     setStepIndex(prev => prev - 1);
   };
 
+  const handleFormSubmit = handleSubmit(data => {
+    if (isLastStep) onSubmit(data);
+    else handleNext();
+  });
+
   return (
     <section>
       <div className="mb-8">
         <StepIndicator currentStep={stepIndex} totalSteps={content.length} />
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleFormSubmit}>
         <div className="rounded-lg bg-cream p-6">{content[stepIndex]}</div>
 
         <div className="mt-8 flex justify-between">
@@ -70,23 +76,12 @@ function StepForm<T extends FieldValues = FieldValues>({
               {cancelButtonText}
             </button>
           )}
-
-          {stepIndex + 1 < content.length ? (
-            <button
-              type="button"
-              onClick={handleNext}
-              className="rounded-full bg-forest px-6 py-2 text-white transition-colors hover:bg-olive"
-            >
-              {nextButtonText}
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="rounded-full bg-forest px-6 py-2 text-white transition-colors hover:bg-olive"
-            >
-              {submitButtonText}
-            </button>
-          )}
+          <button
+            type="submit"
+            className="rounded-full bg-forest px-6 py-2 text-white transition-colors hover:bg-olive"
+          >
+            {isLastStep ? submitButtonText : nextButtonText}
+          </button>
         </div>
       </form>
     </section>
