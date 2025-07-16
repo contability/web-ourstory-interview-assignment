@@ -37,7 +37,7 @@ const BasicInfoStep = ({ errors, register, watch, control, className }: BasicInf
           </FormField>
           <FormField label={{ id: 'signup-phone', content: 'PHONE' }} error={errors.phone || errors.countryCode}>
             <div className="flex w-full gap-2">
-              <div className="w-1/4">
+              <div className="w-1/3 md:w-1/4">
                 <Select optionList={COUNTRY_CODES} control={control} name="countryCode" />
               </div>
               <div className="flex-1">

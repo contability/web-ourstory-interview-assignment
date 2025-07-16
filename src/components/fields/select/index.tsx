@@ -65,7 +65,7 @@ const Select = <T extends FieldValues = FieldValues>({ optionList, name, control
         />
       </button>
       {isOpen && (
-        <ul className="absolute z-10 mt-1 max-h-96 w-full overflow-auto rounded-md border border-forest bg-cream py-1 shadow-lg">
+        <ul className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border border-forest bg-cream py-1 shadow-lg">
           {optionList.map(option => (
             <li key={`select-box__link-${option.value}`} role="option">
               <button
