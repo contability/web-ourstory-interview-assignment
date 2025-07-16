@@ -31,8 +31,9 @@ const FormField = ({
         className={twMerge('flex items-center gap-2 lg:gap-3', isLineBreak && 'flex-col items-baseline gap-1 lg:gap-1')}
       >
         {label?.content && (
+          // FIXME: for 비워도 에러 안나도록 수정 필요.
           <label
-            htmlFor={label.id}
+            htmlFor={label.id || undefined}
             className={twMerge(
               'mb-1 block w-[5rem] text-sm font-medium text-gray-700 md:text-base lg:text-lg',
               isLineBreak && 'w-full',

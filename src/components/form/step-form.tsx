@@ -28,7 +28,7 @@ function StepForm<T extends FieldValues = FieldValues>({
   onSubmit,
   onCancel,
 }: StepFormProps<T>) {
-  const [stepIndex, setStepIndex] = useState(0);
+  const [stepIndex, setStepIndex] = useState(1);
 
   const handleNext = async () => {
     if (fieldsToValidateByStep && fieldsToValidateByStep[stepIndex]) {

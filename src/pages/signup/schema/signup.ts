@@ -15,7 +15,8 @@ export const signupFormSchema = z.object({
       message: '올바른 전화번호 형식이 아닙니다. (9-11자리 숫자)',
     }),
   birthday: z.string(),
-  gender: z.string(),
+  // TODO: undefined 허용 확인
+  gender: z.number().optional(),
   name: z.string(),
   nickName: z.string(),
 });

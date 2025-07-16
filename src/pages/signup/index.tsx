@@ -26,7 +26,7 @@ const SignupPage = () => {
       countryCode: '',
       phone: '',
       birthday: '',
-      gender: '',
+      gender: undefined,
       name: '',
       nickName: '',
     },
@@ -52,7 +52,13 @@ const SignupPage = () => {
           <StepForm
             content={[
               <BasicInfoStep key="basic-info" register={register} watch={watch} errors={errors} control={control} />,
-              <AdditionalInfoStep key="additional-info" register={register} watch={watch} errors={errors} />,
+              <AdditionalInfoStep
+                key="additional-info"
+                register={register}
+                watch={watch}
+                errors={errors}
+                control={control}
+              />,
             ]}
             fieldsToValidateByStep={[
               ['id', 'password', 'email', 'countryCode', 'phone'],

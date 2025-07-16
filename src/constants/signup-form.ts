@@ -60,3 +60,14 @@ export const COUNTRY_CODES: LabelValuePair[] = [
   { value: '+977', label: '+977' }, // 네팔
   { value: '+998', label: '+998' }, // 우즈베키스탄
 ];
+
+export const GENDER_OPTIONS: LabelValuePair[] = [
+  {
+    label: '남자',
+    value: 1,
+  },
+  {
+    label: '여자',
+    value: 2,
+  },
+];
