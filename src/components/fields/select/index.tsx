@@ -26,7 +26,7 @@ const Select = <T extends FieldValues = FieldValues>({ optionList, name, control
     name,
     control,
   });
-  const selectedOption = optionList.find(option => parseValue(option.value) === parseValue(value))?.label || '선택';
+  const selectedOption = optionList.find(option => parseValue(option.value) === parseValue(value))?.label;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -58,7 +58,11 @@ const Select = <T extends FieldValues = FieldValues>({ optionList, name, control
           className,
         )}
       >
-        <span className="truancate text-gray-800">{selectedOption}</span>
+        {!!selectedOption ? (
+          <span className="truncate text-gray-800">{selectedOption}</span>
+        ) : (
+          <span className="text-gray-400">선택</span>
+        )}
         <MdOutlineKeyboardArrowDown
           size={17}
           className={`ml-2 flex-shrink-0 text-forest transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
@@ -71,7 +75,7 @@ const Select = <T extends FieldValues = FieldValues>({ optionList, name, control
               <button
                 type="button"
                 onClick={() => handleOptionSelect(option.value)}
-                className={`flex w-full items-center px-3 py-2 text-left text-base hover:bg-sand md:text-lg ${parseValue(option.value) === parseValue(value) ? 'bg-cream text-forest' : 'text-gray-800'}`}
+                className={`flex w-full items-center px-3 py-2 text-left text-base hover:bg-sand md:text-lg lg:text-xl ${parseValue(option.value) === parseValue(value) ? 'bg-cream text-forest' : 'text-gray-800'}`}
               >
                 <span className="truncate">{option.label}</span>
               </button>

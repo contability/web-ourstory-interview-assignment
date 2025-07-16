@@ -21,7 +21,7 @@ const Input = (props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
         placeholder={placeholder}
         id={id}
         className={twMerge(
-          'w-full rounded-md border border-gray-300 p-2 text-base focus:border-forest focus:outline-none md:text-lg lg:p-3 lg:text-xl',
+          'w-full rounded-md border border-gray-300 p-2 text-base placeholder:text-gray-400 focus:border-forest focus:outline-none md:text-lg lg:p-3 lg:text-xl',
           className,
         )}
       />
