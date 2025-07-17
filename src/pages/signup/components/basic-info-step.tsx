@@ -11,12 +11,11 @@ interface BasicInfoStepProps {
   register: UseFormRegister<SignupFormValues>;
   watch: UseFormWatch<SignupFormValues>;
   control?: Control<SignupFormValues>;
-  className?: string;
 }
 
-const BasicInfoStep = ({ errors, register, watch, control, className }: BasicInfoStepProps) => {
+const BasicInfoStep = ({ errors, register, watch, control }: BasicInfoStepProps) => {
   return (
-    <fieldset className={className}>
+    <fieldset>
       <InfoDisplayLayout title="기본 정보">
         <div className="space-y-4">
           {/* TODO: Required props 및 UI 추가 */}

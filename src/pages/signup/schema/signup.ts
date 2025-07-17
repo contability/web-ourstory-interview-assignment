@@ -19,6 +19,8 @@ export const signupFormSchema = z.object({
   gender: z.number().optional(),
   name: z.string(),
   nickName: z.string(),
+  googleId: z.string(),
+  googleEmail: z.string(),
 });
 
 export type SignupFormValues = z.infer<typeof signupFormSchema>;

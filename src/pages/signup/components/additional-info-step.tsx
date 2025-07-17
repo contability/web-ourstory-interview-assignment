@@ -12,16 +12,14 @@ interface AdditionalInfoStepProps {
   register: UseFormRegister<SignupFormValues>;
   watch: UseFormWatch<SignupFormValues>;
   control?: Control<SignupFormValues>;
-  className?: string;
 }
 
-const AdditionalInfoStep = ({ errors, register, watch, control, className }: AdditionalInfoStepProps) => {
+const AdditionalInfoStep = ({ errors, register, watch, control }: AdditionalInfoStepProps) => {
   return (
-    <fieldset className={className}>
+    <fieldset>
       <InfoDisplayLayout title="추가 정보">
         <div className="space-y-4">
           <FormField label={{ id: 'signup-birthday', content: 'BIRTH' }} error={errors.birthday}>
-            {/* <Input id="signup-birthday" type="date" value={watch('birthday')} {...register('birthday')} /> */}
             <DayPickerInput control={control} name="birthday" />
           </FormField>
           <FormField label={{ content: 'GENDER' }} error={errors.gender}>

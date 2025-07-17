@@ -2,7 +2,7 @@ import Heading from '@components/typography/heading';
 import StepForm from '@components/form/step-form';
 import BasicInfoStep from './components/basic-info-step';
 import AdditionalInfoStep from './components/additional-info-step';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signupFormSchema } from './schema/signup';
 import type { SignupFormValues } from './schema/signup';
@@ -10,11 +10,31 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import AlertModal from '@components/modal/content/alert-modal';
 import KeyValueList from '@components/key-value-list.tsx';
+import SnsStep from './components/sns-step';
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<Record<string, string | number>>();
+
+  const methods = useForm<SignupFormValues>({
+    resolver: zodResolver(signupFormSchema),
+    defaultValues: {
+      id: 'TEST ID',
+      password: 'TEST PW',
+      email: 'eamil@email.com',
+      countryCode: '+1',
+      phone: '11111111111',
+      birthday: '',
+      gender: undefined,
+      name: '',
+      nickName: '',
+      googleId: '',
+      googleEmail: '',
+    },
+    mode: 'onSubmit',
+  });
+
   const {
     register,
     handleSubmit,
@@ -22,21 +42,7 @@ const SignupPage = () => {
     trigger,
     control,
     formState: { errors },
-  } = useForm<SignupFormValues>({
-    resolver: zodResolver(signupFormSchema),
-    defaultValues: {
-      id: '',
-      password: '',
-      email: '',
-      countryCode: '',
-      phone: '',
-      birthday: '',
-      gender: undefined,
-      name: '',
-      nickName: '',
-    },
-    mode: 'onSubmit',
-  });
+  } = methods;
 
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -52,6 +58,8 @@ const SignupPage = () => {
       gender: formData.gender ?? '',
       name: formData.name,
       nickName: formData.nickName,
+      googleId: formData.googleId,
+      googleEmail: formData.googleEmail,
     });
     setIsModalOpen(true);
   };
@@ -67,27 +75,30 @@ const SignupPage = () => {
         </header>
 
         <div className="p-6">
-          <StepForm
-            content={[
-              <BasicInfoStep key="basic-info" register={register} watch={watch} errors={errors} control={control} />,
-              <AdditionalInfoStep
-                key="additional-info"
-                register={register}
-                watch={watch}
-                errors={errors}
-                control={control}
-              />,
-            ]}
-            fieldsToValidateByStep={[
-              ['id', 'password', 'email', 'countryCode', 'phone'],
-              ['birthday', 'gender', 'name', 'nickName'],
-            ]}
-            submitButtonText="가입 완료"
-            trigger={trigger}
-            onSubmit={handleSignupComplete}
-            handleSubmit={handleSubmit}
-            onCancel={() => navigate('/')}
-          />
+          <FormProvider {...methods}>
+            <StepForm
+              content={[
+                <BasicInfoStep key="basic-info" register={register} watch={watch} errors={errors} control={control} />,
+                <AdditionalInfoStep
+                  key="additional-info"
+                  register={register}
+                  watch={watch}
+                  errors={errors}
+                  control={control}
+                />,
+                <SnsStep key="sns" />,
+              ]}
+              fieldsToValidateByStep={[
+                ['id', 'password', 'email', 'countryCode', 'phone'],
+                ['birthday', 'gender', 'name', 'nickName'],
+              ]}
+              submitButtonText="가입 완료"
+              trigger={trigger}
+              onSubmit={handleSignupComplete}
+              handleSubmit={handleSubmit}
+              onCancel={() => navigate('/')}
+            />
+          </FormProvider>
         </div>
       </article>
       <AlertModal

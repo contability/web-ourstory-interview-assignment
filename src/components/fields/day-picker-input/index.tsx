@@ -24,23 +24,15 @@ const DayPickerInput = <T extends FieldValues = FieldValues>({ control, name }: 
     control,
   });
 
-  // Hook to handle the body scroll behavior and focus trapping
+  // 초기 마운트 및 value 값 변경 시 selectedDate 상태 업데이트
   // useEffect(() => {
-  //   const handleBodyScroll = (isOpen: boolean) => {
-  //     document.body.style.overflow = isOpen ? 'hidden' : '';
-  //   };
-  //   if (!dialogRef.current) return;
-  //   if (isModalOpen) {
-  //     handleBodyScroll(true);
-  //     dialogRef.current.showModal();
-  //   } else {
-  //     handleBodyScroll(false);
-  //     dialogRef.current.close();
+  //   if (value) {
+  //     const parsedDate = parse(value, 'yyyy-MM-dd', new Date());
+  //     if (isValid(parsedDate)) {
+  //       setSelectedDate(parsedDate);
+  //     }
   //   }
-  //   return () => {
-  //     handleBodyScroll(false);
-  //   };
-  // }, [isModalOpen]);
+  // }, [value]);
 
   const handleDayPickerSelect = (date: Date | undefined) => {
     if (!date) {
@@ -82,6 +74,7 @@ const DayPickerInput = <T extends FieldValues = FieldValues>({ control, name }: 
         className="w-full rounded-md border border-gray-300 p-2 text-base placeholder:text-gray-400 focus:border-forest focus:outline-none md:text-lg lg:p-3 lg:text-xl"
       />
       <button
+        type="button"
         className="absolute top-1/2 right-3 -translate-y-1/2"
         onClick={() => setIsOpen(true)}
         aria-controls="dialog"
@@ -108,6 +101,7 @@ const DayPickerInput = <T extends FieldValues = FieldValues>({ control, name }: 
                 chevron: 'fill-forest',
                 today: 'border-forest',
               }}
+              defaultMonth={selectedDate}
             />
           </div>
         </div>
