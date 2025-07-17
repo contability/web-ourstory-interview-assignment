@@ -175,3 +175,10 @@
     text-decoration: none;
   }
 }
+
+.rdp-root {
+  --rdp-selected-border: 2px solid #7b8165;
+}
+.rdp-selected {
+  font-size: 1.2rem;
+}

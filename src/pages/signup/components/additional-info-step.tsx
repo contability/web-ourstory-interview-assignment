@@ -5,6 +5,7 @@ import Input from '@components/fields/input';
 import type { SignupFormValues } from '../schema/signup';
 import RadioGroup from '@components/fields/radio-group';
 import { GENDER_OPTIONS } from 'constants/signup-form';
+import DayPickerInput from '@components/fields/day-picker-input';
 
 interface AdditionalInfoStepProps {
   errors: FieldErrors<SignupFormValues>;
@@ -20,7 +21,8 @@ const AdditionalInfoStep = ({ errors, register, watch, control, className }: Add
       <InfoDisplayLayout title="추가 정보">
         <div className="space-y-4">
           <FormField label={{ id: 'signup-birthday', content: 'BIRTH' }} error={errors.birthday}>
-            <Input id="signup-birthday" type="date" value={watch('birthday')} {...register('birthday')} />
+            {/* <Input id="signup-birthday" type="date" value={watch('birthday')} {...register('birthday')} /> */}
+            <DayPickerInput control={control} name="birthday" />
           </FormField>
           <FormField label={{ content: 'GENDER' }} error={errors.gender}>
             <RadioGroup optionList={GENDER_OPTIONS} name="gender" control={control} />
