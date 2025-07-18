@@ -1,6 +1,6 @@
 import GoogleIcon from '@components/icons/google-icon';
 import { useGoogleLogin } from '@react-oauth/google';
-import type { SignupFormValues } from 'pages/signup/schema/signup';
+import type { SignupFormValues } from 'schema/signup';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -37,7 +37,7 @@ const GoogleLoginButton = () => {
           },
         });
 
-        const responseData = await response.json();
+        const responseData: GoogleUserInfo = await response.json();
         setIsConnected(true);
 
         if (responseData.sub && responseData.email) {

@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import StepIndicator from '@components/form/step-indicator';
-import { type FieldValues, type UseFormTrigger, type UseFormHandleSubmit, type Path } from 'react-hook-form';
+import {
+  type FieldValues,
+  type UseFormTrigger,
+  type UseFormHandleSubmit,
+  type Path,
+  type UseFormWatch,
+} from 'react-hook-form';
 import StepButtons from './step-buttons';
+import { useSignupStore } from '../../stores/signup-store';
 
 interface StepFormProps<T extends FieldValues = FieldValues> {
   content: ReactNode[];
@@ -15,6 +22,7 @@ interface StepFormProps<T extends FieldValues = FieldValues> {
   handleSubmit: UseFormHandleSubmit<T>;
   onSubmit: (formData: T) => void;
   onCancel?: () => void;
+  watch: UseFormWatch<T>;
 }
 
 function StepForm<T extends FieldValues = FieldValues>({
@@ -28,27 +36,51 @@ function StepForm<T extends FieldValues = FieldValues>({
   handleSubmit,
   onSubmit,
   onCancel,
+  watch,
 }: StepFormProps<T>) {
-  const [stepIndex, setStepIndex] = useState(0);
+  const { setSignupData, setCurrentStep, currentStep, clearSignupData } = useSignupStore();
+  const [stepIndex, setStepIndex] = useState(currentStep || 0);
   const isLastStep = stepIndex + 1 === content.length;
 
   const handleNext = async () => {
     if (fieldsToValidateByStep && fieldsToValidateByStep[stepIndex]) {
       const isStepValid = await trigger(fieldsToValidateByStep[stepIndex]);
-      if (isStepValid) setStepIndex(prev => prev + 1);
+      if (isStepValid) {
+        const currentValues = watch();
+        setSignupData(currentValues);
+        setStepIndex((prev: number) => prev + 1);
+      }
     } else {
-      setStepIndex(prev => prev + 1);
+      const currentValues = watch();
+      setSignupData(currentValues);
+      setStepIndex((prev: number) => prev + 1);
     }
   };
 
   const handlePrev = () => {
-    setStepIndex(prev => prev - 1);
+    const currentValues = watch();
+    setSignupData(currentValues);
+    setStepIndex((prev: number) => prev - 1);
   };
 
   const handleFormSubmit = handleSubmit(data => {
-    if (isLastStep) onSubmit(data);
-    else handleNext();
+    if (isLastStep) {
+      onSubmit(data);
+      // 제출 후 데이터 초기화
+      clearSignupData();
+    } else {
+      handleNext();
+    }
   });
+
+  const handleCancel = () => {
+    clearSignupData();
+    if (onCancel) onCancel();
+  };
+
+  useEffect(() => {
+    setCurrentStep(stepIndex);
+  }, [stepIndex, setCurrentStep]);
 
   return (
     <section>
@@ -66,7 +98,7 @@ function StepForm<T extends FieldValues = FieldValues>({
           submitButtonText={submitButtonText}
           nextButtonText={nextButtonText}
           handlePrev={handlePrev}
-          onCancel={onCancel}
+          onCancel={handleCancel}
         />
       </form>
     </section>

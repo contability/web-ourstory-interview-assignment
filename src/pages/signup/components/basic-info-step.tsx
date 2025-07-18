@@ -2,7 +2,7 @@ import type { Control, FieldErrors, UseFormRegister, UseFormWatch } from 'react-
 import InfoDisplayLayout from '@components/layout/info-display-layout';
 import FormField from '@components/fields/form-field';
 import Input from '@components/fields/input';
-import type { SignupFormValues } from '../schema/signup';
+import type { SignupFormValues } from '../../../schema/signup';
 import Select from '@components/fields/select';
 import { COUNTRY_CODES } from 'constants/signup-form';
 

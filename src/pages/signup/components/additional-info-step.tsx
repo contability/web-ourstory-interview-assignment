@@ -2,7 +2,7 @@ import type { Control, FieldErrors, UseFormRegister, UseFormWatch } from 'react-
 import InfoDisplayLayout from '@components/layout/info-display-layout';
 import FormField from '@components/fields/form-field';
 import Input from '@components/fields/input';
-import type { SignupFormValues } from '../schema/signup';
+import type { SignupFormValues } from '../../../schema/signup';
 import RadioGroup from '@components/fields/radio-group';
 import { GENDER_OPTIONS } from 'constants/signup-form';
 import DayPickerInput from '@components/fields/day-picker-input';

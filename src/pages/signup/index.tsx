@@ -4,18 +4,20 @@ import BasicInfoStep from './components/basic-info-step';
 import AdditionalInfoStep from './components/additional-info-step';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signupFormSchema } from './schema/signup';
-import type { SignupFormValues } from './schema/signup';
+import { signupFormSchema } from '../../schema/signup';
+import type { SignupFormValues } from '../../schema/signup';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AlertModal from '@components/modal/content/alert-modal';
 import KeyValueList from '@components/key-value-list.tsx';
 import SnsStep from './components/sns-step';
+import { useSignupStore } from '../../stores/signup-store';
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<Record<string, string | number>>();
+  const { signupData, clearSignupData } = useSignupStore();
 
   const methods = useForm<SignupFormValues>({
     resolver: zodResolver(signupFormSchema),
@@ -41,11 +43,22 @@ const SignupPage = () => {
     watch,
     trigger,
     control,
+    reset,
     formState: { errors },
   } = methods;
 
+  // 저장된 데이터 복원
+  useEffect(() => {
+    if (signupData && Object.keys(signupData).length > 0) {
+      reset(signupData as any);
+    }
+  }, [reset, signupData]);
+
   const handleModalClose = () => {
     setIsModalOpen(false);
+    // 회원가입 완료 후 데이터 초기화
+    clearSignupData();
+    navigate('/');
   };
 
   const handleSignupComplete = (formData: SignupFormValues) => {
@@ -99,6 +112,7 @@ const SignupPage = () => {
               onSubmit={handleSignupComplete}
               handleSubmit={handleSubmit}
               onCancel={() => navigate('/')}
+              watch={watch}
             />
           </FormProvider>
         </div>

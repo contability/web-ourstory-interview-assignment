@@ -57,17 +57,6 @@ describe('Select 컴포넌트', () => {
     expect(screen.getByText('옵션 3')).toBeInTheDocument();
   });
 
-  test('옵션 선택 시 값이 변경되어야 한다', () => {
-    const selectButton = screen.getByRole('button');
-    fireEvent.click(selectButton);
-
-    const option = screen.getByText('옵션 3');
-    fireEvent.click(option);
-
-    // 옵션이 선택되면 드롭다운이 닫히는지 확인
-    expect(screen.queryByRole('list')).not.toBeInTheDocument();
-  });
-
   test('className prop이 올바르게 적용되어야 한다', () => {
     render(
       <TestFormWrapper>
@@ -77,5 +66,51 @@ describe('Select 컴포넌트', () => {
 
     const selectButton = screen.getByRole('button');
     expect(selectButton).toHaveClass('test-class');
+  });
+
+  test('옵션 선택 시 값이 변경되어야 한다', () => {
+    const { container } = render(
+      <TestFormWrapper>
+        <Select optionList={mockOptions} name="test" />
+      </TestFormWrapper>,
+    );
+
+    // 드롭다운 열기
+    const selectButton = screen.getByRole('button');
+    fireEvent.click(selectButton);
+
+    // 옵션 선택
+    const option = screen.getByText('옵션 2');
+    fireEvent.click(option);
+
+    // 선택된 옵션이 표시되는지 확인
+    expect(screen.getByText('옵션 2')).toBeInTheDocument();
+
+    // 드롭다운이 닫혔는지 확인
+    expect(screen.queryByRole('list')).not.toBeInTheDocument();
+  });
+
+  test('외부 클릭 시 드롭다운이 닫혀야 한다', () => {
+    const { container } = render(
+      <TestFormWrapper>
+        <div data-testid="outside">외부 영역</div>
+        <Select optionList={mockOptions} name="test" />
+      </TestFormWrapper>,
+    );
+
+    // 드롭다운 열기
+    const selectButton = screen.getByRole('button');
+    fireEvent.click(selectButton);
+
+    // 드롭다운이 열렸는지 확인
+    expect(screen.getByRole('list')).toBeInTheDocument();
+
+    // 외부 영역 클릭
+    const outsideArea = screen.getByTestId('outside');
+    fireEvent.mouseDown(outsideArea);
+    fireEvent.click(outsideArea);
+
+    // 드롭다운이 닫혔는지 확인
+    expect(screen.queryByRole('list')).not.toBeInTheDocument();
   });
 });
