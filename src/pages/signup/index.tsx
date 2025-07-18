@@ -20,11 +20,11 @@ const SignupPage = () => {
   const methods = useForm<SignupFormValues>({
     resolver: zodResolver(signupFormSchema),
     defaultValues: {
-      id: 'TEST ID',
-      password: 'TEST PW',
-      email: 'eamil@email.com',
-      countryCode: '+1',
-      phone: '11111111111',
+      id: '',
+      password: '',
+      email: '',
+      countryCode: '',
+      phone: '',
       birthday: '',
       gender: undefined,
       name: '',
@@ -49,6 +49,7 @@ const SignupPage = () => {
   };
 
   const handleSignupComplete = (formData: SignupFormValues) => {
+    // NOTE: 실제 API 연동으로 이어지지 않으므로 모달로 시각화하는 것으로 임시 구현.
     setModalContent({
       id: formData.id,
       password: formData.password,
@@ -91,6 +92,7 @@ const SignupPage = () => {
               fieldsToValidateByStep={[
                 ['id', 'password', 'email', 'countryCode', 'phone'],
                 ['birthday', 'gender', 'name', 'nickName'],
+                ['googleId', 'googleEmail'],
               ]}
               submitButtonText="가입 완료"
               trigger={trigger}

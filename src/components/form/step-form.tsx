@@ -29,7 +29,7 @@ function StepForm<T extends FieldValues = FieldValues>({
   onSubmit,
   onCancel,
 }: StepFormProps<T>) {
-  const [stepIndex, setStepIndex] = useState(1);
+  const [stepIndex, setStepIndex] = useState(0);
   const isLastStep = stepIndex + 1 === content.length;
 
   const handleNext = async () => {
