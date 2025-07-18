@@ -14,7 +14,7 @@ describe('FormField 컴포넌트', () => {
     expect(inputElement).toBeInTheDocument();
   });
 
-  test('라벨이 올바르게 렌더링되어야 한다', () => {
+  test('레이블이 올바르게 렌더링되어야 한다', () => {
     render(
       <FormField label={{ id: 'test-input', content: '테스트 라벨' }}>
         <Input id="test-input" placeholder="라벨 테스트" />
