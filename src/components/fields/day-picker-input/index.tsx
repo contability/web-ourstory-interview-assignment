@@ -8,11 +8,12 @@ import { IoCalendarClearOutline } from 'react-icons/io5';
 import Modal from '@components/modal';
 
 interface DayPickerInputProps<T extends FieldValues = FieldValues> {
+  id?: string;
   control?: Control<T>;
   name: Path<T>;
 }
 
-const DayPickerInput = <T extends FieldValues = FieldValues>({ control, name }: DayPickerInputProps<T>) => {
+const DayPickerInput = <T extends FieldValues = FieldValues>({ id, control, name }: DayPickerInputProps<T>) => {
   const defaultClassNames = getDefaultClassNames();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -59,7 +60,7 @@ const DayPickerInput = <T extends FieldValues = FieldValues>({ control, name }: 
       <div className="relative w-full" ref={wrapperRef}>
         <input
           style={{ fontSize: 'inherit' }}
-          id="date-input"
+          id={id}
           type="text"
           value={value}
           placeholder="yyyy-MM-dd"

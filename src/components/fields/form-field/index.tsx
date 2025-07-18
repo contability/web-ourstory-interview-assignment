@@ -15,6 +15,7 @@ interface FormFieldProps {
   labelClassName?: string;
   className?: string;
   isLineBreak?: boolean;
+  isRequired?: boolean;
 }
 
 const FormField = ({
@@ -23,6 +24,7 @@ const FormField = ({
   isLineBreak = false,
   labelClassName = '',
   className = '',
+  isRequired = false,
   children,
 }: PropsWithChildren<FormFieldProps>) => {
   return (
@@ -31,9 +33,8 @@ const FormField = ({
         className={twMerge('flex items-center gap-2 lg:gap-3', isLineBreak && 'flex-col items-baseline gap-1 lg:gap-1')}
       >
         {label?.content && (
-          // FIXME: for 비워도 에러 안나도록 수정 필요.
           <label
-            htmlFor={label.id || undefined}
+            htmlFor={label.id}
             className={twMerge(
               'mb-1 block w-[5rem] text-sm font-medium text-gray-700 md:text-base lg:text-lg',
               isLineBreak && 'w-full',
@@ -41,6 +42,11 @@ const FormField = ({
             )}
           >
             {label.content}
+            {isRequired && (
+              <span className="ml-1 text-red-500" aria-hidden="true">
+                *
+              </span>
+            )}
           </label>
         )}
         {children}

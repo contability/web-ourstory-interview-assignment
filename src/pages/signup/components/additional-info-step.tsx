@@ -20,7 +20,7 @@ const AdditionalInfoStep = ({ errors, register, watch, control }: AdditionalInfo
       <InfoDisplayLayout title="추가 정보">
         <div className="space-y-4">
           <FormField label={{ id: 'signup-birthday', content: 'BIRTH' }} error={errors.birthday}>
-            <DayPickerInput control={control} name="birthday" />
+            <DayPickerInput id="signup-birthday" control={control} name="birthday" />
           </FormField>
           <FormField label={{ content: 'GENDER' }} error={errors.gender}>
             <RadioGroup optionList={GENDER_OPTIONS} name="gender" control={control} />

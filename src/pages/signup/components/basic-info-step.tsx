@@ -18,11 +18,10 @@ const BasicInfoStep = ({ errors, register, watch, control }: BasicInfoStepProps)
     <fieldset>
       <InfoDisplayLayout title="기본 정보">
         <div className="space-y-4">
-          {/* TODO: Required props 및 UI 추가 */}
-          <FormField label={{ id: 'signup-id', content: 'ID' }} error={errors.id}>
+          <FormField label={{ id: 'signup-id', content: 'ID' }} error={errors.id} isRequired>
             <Input id="signup-id" value={watch('id')} aria-required="true" {...register('id')} />
           </FormField>
-          <FormField label={{ id: 'signup-password', content: 'PW' }} error={errors.password}>
+          <FormField label={{ id: 'signup-password', content: 'PW' }} error={errors.password} isRequired>
             <Input
               id="signup-password"
               type="password"
@@ -31,10 +30,14 @@ const BasicInfoStep = ({ errors, register, watch, control }: BasicInfoStepProps)
               {...register('password')}
             />
           </FormField>
-          <FormField label={{ id: 'signup-email', content: 'EMAIL' }} error={errors.email}>
+          <FormField label={{ id: 'signup-email', content: 'EMAIL' }} error={errors.email} isRequired>
             <Input id="signup-email" type="email" value={watch('email')} aria-required="true" {...register('email')} />
           </FormField>
-          <FormField label={{ id: 'signup-phone', content: 'PHONE' }} error={errors.phone || errors.countryCode}>
+          <FormField
+            label={{ id: 'signup-phone', content: 'PHONE' }}
+            error={errors.phone || errors.countryCode}
+            isRequired
+          >
             <div className="flex w-full gap-2">
               <div className="w-1/3 md:w-1/4">
                 <Select optionList={COUNTRY_CODES} control={control} name="countryCode" />
