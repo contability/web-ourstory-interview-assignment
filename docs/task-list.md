@@ -11,7 +11,7 @@
 - [x] 퍼블리싱
 - [x] input, form field 컴포넌트 추가
 - [x] zod, react-hook-form 설치
-- [ ] signup store를 활용하여 폼 작성 중 새로고침 발생 시 입력 데이터를 유지하는 기능 구현
+- [x] signup store를 활용하여 폼 작성 중 새로고침 발생 시 입력 데이터를 유지하는 기능 구현
 - [x] date picker 적용
 - [x] SNS 소셜 계정 연결
 - [x] 회원가입 버튼 (추후 동작에 대한 기획 부재, 간단한 submit 액션으로 대체)
